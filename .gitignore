@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# Maven
+log/
+target/
+
+# Spring Boot
+mvnw
+mvnw.cmd
+src/main/resources/application.properties
+
+# VSCode
+.vscode/
