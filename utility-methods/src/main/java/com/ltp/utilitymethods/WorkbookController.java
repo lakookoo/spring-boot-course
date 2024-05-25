@@ -11,6 +11,7 @@ public class WorkbookController {
     @GetMapping(value="/")
     public String getMethodName(Model model) {
         model.addAttribute("menu", "We sell chocolate rice cakes bubble tea");
+        model.addAttribute("name", "Larisa");
         return "view";
     }
     

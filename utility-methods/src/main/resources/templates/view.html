@@ -5,6 +5,17 @@
         <title>Utility Methods</title>
     </head>
     <body>
-        <h1 th:text="${#strings.contains(menu, 'rice cake')} ? 'we have this item' : ' we do not have this'"></h1>  
+        <h1 th:text="${#strings.contains(menu, 'rice cake')} ? 'we have this item' : ' we do not have this'"></h1>
+        
+        <p th:text="${name}" style="font-weight: bold">
+        <ul >
+            <li th:text="${#strings.substring(name, 0, 1)}"> </li>
+            <li th:text="${#strings.substring(name, 0, 2)}"> </li>
+            <li th:text="${#strings.substring(name, 0, 3)}"> </li>
+            <li th:text="${#strings.substring(name, 0, 4)}"> </li>
+            <li th:text="${#strings.substring(name, 0, 5)}"> </li>
+            <li th:text="${#strings.substring(name, 0, 6)}"> </li>
+        </ul>
+        </p>
     </body>
 </html>
