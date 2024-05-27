@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class GradeController {
@@ -17,6 +19,13 @@ public class GradeController {
         new Grades( "Hermione", "Arithmancy", "A+"),
         new Grades( "Neville", "Charms", "A-")
     );
+
+    @GetMapping("/")
+    public String getMethodName(Model model) {
+        model.addAttribute("grade", new Grades());
+        return "form";
+    }
+    
 
     @GetMapping("/grades")
     public String getGrades(Model model){
