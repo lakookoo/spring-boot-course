@@ -13,6 +13,9 @@ public class StoreController {
         return "form";
     }
 
-
+    @GetMapping("/inventory")
+    public String getInventory() {
+        return "inventory";
+    }
 
 }
