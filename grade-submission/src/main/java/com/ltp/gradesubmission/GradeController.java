@@ -20,8 +20,14 @@ public class GradeController {
     List<Grades> studentGrades = new ArrayList<>();
 
     @GetMapping("/")
-    public String getMethodName(Model model) {
-        model.addAttribute("grade", new Grades());
+    public String getForm(Model model, @RequestParam(required = false) String name) {
+        Grades grade;
+        if(getGradeImdex(name) == -1000){
+            grade = new Grades();
+        } else {
+            grade = studentGrades.get(getGradeImdex(name));
+        }
+        model.addAttribute("grade", grade);
         return "form";
     }
 
@@ -39,5 +45,12 @@ public class GradeController {
         
         model.addAttribute("grades", studentGrades);
         return "grades";
+    }
+
+    public Integer getGradeImdex(String name){
+        for(int i = 0; i < studentGrades.size(); i++){
+            if (studentGrades.get(i).getName().equals(name)) return i;
+        }
+        return -1000;
     }
 }
