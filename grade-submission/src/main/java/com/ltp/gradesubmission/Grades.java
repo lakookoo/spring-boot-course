@@ -38,4 +38,13 @@ public class Grades {
     public void setScore(String score){
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "Grades{" +
+                "name='" + name + '\'' +
+                ", subject='" + subject + '\'' +
+                ", score='" + score + '\'' +
+                '}';
+    }
 }

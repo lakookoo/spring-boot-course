@@ -9,22 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
 public class GradeController {
 
-    List<Grades> studentGrades = Arrays.asList(
-        new Grades( "Harry", "Potions", "C-"),
-        new Grades( "Hermione", "Arithmancy", "A+"),
-        new Grades( "Neville", "Charms", "A-")
-    );
+    List<Grades> studentGrades = new ArrayList<>();
 
     @GetMapping("/")
     public String getMethodName(Model model) {
         model.addAttribute("grade", new Grades());
         return "form";
     }
+
+    @PostMapping("/handleSubmit")
+    public String submitForm(Grades grade) {
+        
+        studentGrades.add(grade);
+        return "redirect:/grades";
+    }
+    
     
 
     @GetMapping("/grades")
