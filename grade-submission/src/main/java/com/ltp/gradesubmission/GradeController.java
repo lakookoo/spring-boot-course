@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -20,15 +19,16 @@ public class GradeController {
     List<Grades> studentGrades = new ArrayList<>();
 
     @GetMapping("/")
-    public String getForm(Model model, @RequestParam(required = false) String name) {
-        model.addAttribute("grade", getGradeIndex(name) == -1000 ? new Grades() : studentGrades.get(getGradeIndex(name)));
+    public String getForm(Model model, @RequestParam(required = false) String id) {
+        int index = getGradeIndex(id);
+        model.addAttribute("grade", index == Constants.NOT_FOUND ? new Grades() : studentGrades.get(index));
         return "form";
     }
 
     @PostMapping("/handleSubmit")
     public String submitForm(Grades grade) {
-        int index = getGradeIndex(grade.getName());
-        if(index == -1000){
+        int index = getGradeIndex(grade.getId());
+        if(index == Constants.NOT_FOUND){
             studentGrades.add(grade);
         } else {
             studentGrades.set(index, grade);
@@ -46,10 +46,10 @@ public class GradeController {
         return "grades";
     }
 
-    public Integer getGradeIndex(String name){
+    public Integer getGradeIndex(String id){
         for(int i = 0; i < studentGrades.size(); i++){
-            if (studentGrades.get(i).getName().equals(name)) return i;
+            if (studentGrades.get(i).getId().equals(id)) return i;
         }
-        return -1000;
+        return Constants.NOT_FOUND;
     }
 }
