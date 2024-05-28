@@ -21,20 +21,19 @@ public class GradeController {
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String name) {
-        //Grades grade;
-        // if(getGradeImdex(name) == -1000){
-        //     grade = new Grades();
-        // } else {
-        //     grade = studentGrades.get(getGradeImdex(name));
-        // }
         model.addAttribute("grade", getGradeIndex(name) == -1000 ? new Grades() : studentGrades.get(getGradeIndex(name)));
         return "form";
     }
 
     @PostMapping("/handleSubmit")
     public String submitForm(Grades grade) {
+        int index = getGradeIndex(grade.getName());
+        if(index == -1000){
+            studentGrades.add(grade);
+        } else {
+            studentGrades.set(index, grade);
+        }
         
-        studentGrades.add(grade);
         return "redirect:/grades";
     }
     
