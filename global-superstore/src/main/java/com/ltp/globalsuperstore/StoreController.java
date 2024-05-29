@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StoreController {
@@ -14,9 +15,10 @@ public class StoreController {
     private List<Item> items = new ArrayList<Item>();
     
     @GetMapping("/")
-    public String getForm(Model model) {
+    public String getForm(Model model, @RequestParam(required = false) String id) {
+        int index = getItemIndex(id);
         model.addAttribute("categories", Constants.CATEGORIES);
-        model.addAttribute("item", new Item());
+        model.addAttribute("item", index == -1000 ? new Item() : items.get(index));
         return "form";
     }
 
@@ -32,6 +34,16 @@ public class StoreController {
         return "redirect:/inventory";
 
     }
+
+    public Integer getItemIndex(String id){
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getId().equals(id)) return i;
+
+        }
+        return -1000;
+    }
+
+
 
 
 }
