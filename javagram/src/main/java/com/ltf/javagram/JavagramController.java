@@ -2,8 +2,12 @@ package com.ltf.javagram;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import jakarta.validation.Valid;
 
 
 
@@ -18,11 +22,14 @@ public class JavagramController {
 
     @GetMapping("/result")
     public String getResult() {
+
         return "result";
     }
 
     @PostMapping("/submitItem")
-    public String handleSubmit(User user) {
+    public String handleSubmit(@Valid @ModelAttribute("user") User user, BindingResult result) {
+        if (result.hasErrors()) return "sign-up";
+
         return "redirect:/result";
     }
     

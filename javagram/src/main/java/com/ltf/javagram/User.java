@@ -2,11 +2,28 @@ package com.ltf.javagram;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 public class User {
+    @NotBlank(message = "First name cannot be blank")
+    @Size(min = 2, message = "First name is too short")
     private String firstName;
+    @NotBlank(message = "Last name cannot be blank")
+    @Size(min = 2, message = "Last name is too short")
     private String lastName;
+    @NotBlank(message = "User name cannot be blank")
+    @Size(min = 7, message = "User name is too short")
     private String userName;
+    @Email(message = "Invalid Email")
     private String email;
+
+    @Past(message = "date of birth must be in the past")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     public User() {
