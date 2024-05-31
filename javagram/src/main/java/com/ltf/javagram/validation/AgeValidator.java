@@ -1,4 +1,4 @@
-package com.ltf.javagram;
+package com.ltf.javagram.validation;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

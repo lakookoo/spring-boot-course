@@ -4,12 +4,13 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ltf.javagram.validation.Age;
+import com.ltf.javagram.validation.Username;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
-
-//import com.ltf.javagram.;
 
 public class User {
     @NotBlank(message = "First name cannot be blank")
