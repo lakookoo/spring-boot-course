@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
+//import com.ltf.javagram.;
+
 public class User {
     @NotBlank(message = "First name cannot be blank")
     @Size(min = 2, message = "First name is too short")
@@ -18,6 +20,7 @@ public class User {
     private String lastName;
     @NotBlank(message = "User name cannot be blank")
     @Size(min = 7, message = "User name is too short")
+    @Username(message = "Cannot contain special characters or uppercase characters ")
     private String userName;
     @Email(message = "Invalid Email")
     private String email;
