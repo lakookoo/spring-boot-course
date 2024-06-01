@@ -1,9 +1,5 @@
 package com.ltp.globalsuperstore.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +18,13 @@ import jakarta.validation.Valid;
 
 @Controller
 public class StoreController {
+    
+    ItemService itemService;
 
-    ItemService itemService = new ItemService();
+    public StoreController(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {

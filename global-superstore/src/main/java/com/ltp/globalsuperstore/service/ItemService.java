@@ -4,12 +4,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
+import org.springframework.stereotype.Service;
+
 import com.ltp.globalsuperstore.Constants;
 import com.ltp.globalsuperstore.Item;
 import com.ltp.globalsuperstore.repository.ItemRepository;
 
+@Service
 public class ItemService {
-    ItemRepository itemRepository = new ItemRepository();
+    
+    ItemRepository itemRepository;
+
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     public Item getItem(int index){
         return itemRepository.getItem(index);
