@@ -34,7 +34,21 @@ public class GradeServiceTest {
         List<Grades> result = gradeService.getGrades();
 
         assertEquals("Hermione", result.get(0).getName());
-        assertEquals("Potions", result.get(1).getSubject());
+        assertEquals("Charms", result.get(1).getSubject());
     }
+
+    @Test
+    public void gradeIndexTest() {
+        Grades grade = new Grades("Harry", "Potions", "C-");
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        int valid = gradeService.getGradeIndex(grade.getId());
+        int notFound = gradeService.getGradeIndex("123");
+
+        assertEquals(0, valid);
+        assertEquals(Constants.NOT_FOUND, notFound);
+    }
+
     
 }

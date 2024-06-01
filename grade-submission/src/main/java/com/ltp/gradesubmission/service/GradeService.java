@@ -30,7 +30,7 @@ public class GradeService {
         return gradeRepository.getGrades();
     }
 
-    public Integer getGradeIndex(String id) {
+    public int getGradeIndex(String id) {
         for (int i = 0; i < getGrades().size(); i++) {
             if (getGrades().get(i).getId().equals(id))
                 return i;

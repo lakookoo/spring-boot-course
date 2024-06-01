@@ -16,12 +16,13 @@ public class Grades {
 
     
 
-    public Grades(@NotBlank(message = "Name cannot be blank") String name,
-            @NotBlank(message = "Subject cannot be blank") String subject, String score) {
+    public Grades(String name, String subject, String score) {
         this.name = name;
         this.subject = subject;
         this.score = score;
+        this.id = UUID.randomUUID().toString();
     }
+    
 
     public String getId() {
         return id;
