@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ltp.gradesubmission.Grades;
 
-
+@Repository
 public class GradeRepository{
    private List<Grades> studentGrades = new ArrayList<>();
 
