@@ -16,6 +16,13 @@ public class Grades {
 
     
 
+    public Grades(@NotBlank(message = "Name cannot be blank") String name,
+            @NotBlank(message = "Subject cannot be blank") String subject, String score) {
+        this.name = name;
+        this.subject = subject;
+        this.score = score;
+    }
+
     public String getId() {
         return id;
     }
