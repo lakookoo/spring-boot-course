@@ -50,5 +50,18 @@ public class GradeServiceTest {
         assertEquals(Constants.NOT_FOUND, notFound);
     }
 
+    @Test
+    public void returnGradeByIdTest(){
+        Grades grade = new Grades("Harry", "Potions", "C-");
+        when(gradeRepository.getGrades()).thenReturn(Arrays.asList(grade));
+        when(gradeRepository.getGrade(0)).thenReturn(grade);
+
+        String id = grade.getId();
+        Grades result = gradeService.getGradeById(id);
+
+        assertEquals(grade, result);
+
+    }
+
     
 }
