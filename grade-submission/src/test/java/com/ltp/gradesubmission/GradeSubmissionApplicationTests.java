@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.ltp.gradesubmission.controller.GradeController;
 
@@ -15,11 +17,17 @@ import com.ltp.gradesubmission.controller.GradeController;
 class GradeSubmissionApplicationTests {
 
 	@Autowired
-	private MockMvc mocMvc;
+	private MockMvc mockMvc;
 
 	@Test
 	void contextLoads() {
-		assertNotNull(mocMvc);
+		assertNotNull(mockMvc);
 	}
+
+	@Test
+	public void testShowGradeFrom(){
+		RequestBuilder request = MockMvcRequestBuilders.get("/?=123");
+		mockMvc.perform(request);
+	} 
 
 }
