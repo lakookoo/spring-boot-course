@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.ltp.gradesubmission.controller.GradeController;
 
 @SpringBootTest
@@ -25,9 +27,12 @@ class GradeSubmissionApplicationTests {
 	}
 
 	@Test
-	public void testShowGradeFrom(){
+	public void testShowGradeFrom() throws Exception{
 		RequestBuilder request = MockMvcRequestBuilders.get("/?=123");
-		mockMvc.perform(request);
+		mockMvc.perform(request)
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(view().name("form"))
+			.andExpect(model().attributeExists("grade"));
 	} 
 
 }
