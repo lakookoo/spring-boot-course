@@ -1,7 +1,8 @@
 package com.ltp.contacts.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.ltp.contacts.pojo.Contact;
 import com.ltp.contacts.service.ContactService;
@@ -19,8 +20,9 @@ public class ContactController {
 
     @GetMapping("/contact/{id}")
     @ResponseBody
-    public Contact getContact(@PathVariable String id) {
-        return new Contact("123", "John Snow", "1234567890");
+    public ResponseEntity<Contact> getContact(@PathVariable String id) {
+        Contact contact = contactService.getContactById(id);
+        return new ResponseEntity<>(contact, HttpStatus.OK);
     }
     
 
