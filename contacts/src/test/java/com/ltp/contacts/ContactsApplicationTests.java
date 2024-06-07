@@ -50,7 +50,7 @@ class ContactsApplicationTests {
 	public void getContactByIdTest() throws Exception {
 		RequestBuilder request = MockMvcRequestBuilders.get("/contact/1");
 		mockMvc.perform(request)
-			.andExpect(status().is2xxSuccessful())
+			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 			.andExpect(jsonPath("$.name").value(contacts[0].getName()))
 			.andExpect(jsonPath("$.phoneNumber").value(contacts[0].getPhoneNumber()));
@@ -58,7 +58,12 @@ class ContactsApplicationTests {
 	
 	@Test
 	public void getAllContactsTest() throws Exception {
-
+		RequestBuilder request = MockMvcRequestBuilders.get("/contact/all");
+		mockMvc.perform(request)
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.size()").value(contacts.length))
+			.andExpect(jsonPath("$.[?(@.id == \"2\" && @.name == \"Tyrion Lannister\" && @.phoneNumber == \"4145433332\")]").exists());
 	}
 
 	@Test
