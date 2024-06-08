@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ltp.gradesubmission.entity.Grade;
 import com.ltp.gradesubmission.repository.GradeRepository;
+import com.ltp.gradesubmission.service.GradeService;
 
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class GradeController {
 
     @Autowired
-    GradeRepository gradeRepository;
+    GradeService gradeService;
 
     @GetMapping("/student/{studentId}/course/{courseId}")
     public ResponseEntity<Grade> getGrade(@PathVariable Long studentId, @PathVariable Long courseId) {
@@ -34,7 +35,7 @@ public class GradeController {
 
     @PostMapping("/student/{studentId}/course/{courseId}")
     public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade, @PathVariable Long studentId, @PathVariable Long courseId) {
-        return new ResponseEntity<>(grade, HttpStatus.CREATED);
+        return new ResponseEntity<>(gradeService.saveGrade(grade, studentId, courseId), HttpStatus.CREATED);
     }
 
     @PutMapping("/student/{studentId}/course/{courseId}")
