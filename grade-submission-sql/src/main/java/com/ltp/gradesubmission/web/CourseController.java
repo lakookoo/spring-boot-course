@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ltp.gradesubmission.entity.Course;
+import com.ltp.gradesubmission.service.CourseService;
 
 import lombok.AllArgsConstructor;
 
@@ -20,6 +21,9 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/course")
 public class CourseController {
+
+    CourseService courseService;
+
     @GetMapping("/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
@@ -28,7 +32,7 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
-        return new ResponseEntity<>(course, HttpStatus.CREATED);
+        return new ResponseEntity<>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
 
 

@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ltp.gradesubmission.entity.Course;
+import com.ltp.gradesubmission.repository.CourseRepository;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
 public class CourseServiceImpl implements CourseService {
+
+    CourseRepository courseRepository;
 
     @Override
     public Course getCourse(Long id) {
@@ -19,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course saveCourse(Course course) {
-        return null;
+        return courseRepository.save(course);
     }
 
     @Override
