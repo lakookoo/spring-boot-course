@@ -45,22 +45,23 @@ public class GradeController {
 
     @DeleteMapping("/student/{studentId}/course/{courseId}")
     public ResponseEntity<HttpStatus> deleteGrade(@PathVariable Long studentId, @PathVariable Long courseId){
+        gradeService.deleteGrade(studentId, courseId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<Grade>> getStudentGrades(@PathVariable Long studentId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getStudentGrades(studentId) ,HttpStatus.OK);
     }
 
     @GetMapping("/course/{courseId}")
     public ResponseEntity<List<Grade>> getCourseGrades(@PathVariable Long coursetId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getCourseGrades(coursetId), HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Grade>> getGrades() {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getAllGrades(), HttpStatus.OK);
     }
 
 }
