@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.StudentService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> saveStudent( @Valid @RequestBody Student student) {
         return new ResponseEntity<>(studentService.saveStudent(student), HttpStatus.CREATED);
     }
 
