@@ -7,6 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.ltp.gradesubmission.entity.Grade;
 
 public interface GradeRepository extends CrudRepository<Grade, Long> {
-    Grade findByStudentId(Long studentId);
-    Grade findByStudentIdAndCourseId(Long studentId, Long courseId);
+    Optional<Grade> findByStudentIdAndCourseId(Long studentId, Long courseId);
 }
