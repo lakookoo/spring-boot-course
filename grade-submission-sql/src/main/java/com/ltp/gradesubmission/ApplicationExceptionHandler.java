@@ -28,7 +28,7 @@ import com.ltp.gradesubmission.exception.StudentNotFoundException;
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    @Nullable
+
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         List<String> errors = new ArrayList<>();
