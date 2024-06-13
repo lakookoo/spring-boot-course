@@ -27,6 +27,8 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.DELETE, "/contact/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/contact/**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(withDefaults())
