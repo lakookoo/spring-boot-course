@@ -2,6 +2,7 @@ package com.ltp.contacts.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -25,14 +26,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
+                .requestMatchers(HttpMethod.DELETE, "/contact/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
-            .httpBasic(withDefaults());
-        
-        http
+            .httpBasic(withDefaults())
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            );
+            )
+            .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
