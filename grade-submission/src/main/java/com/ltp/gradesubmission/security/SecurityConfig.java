@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.security.config.http.SessionCreationPolicy;
 import com.ltp.gradesubmission.security.filter.AuthenticationFilter;
+import com.ltp.gradesubmission.security.filter.ExceptionHandlerFilter;
+
 
 
 @Configuration
@@ -35,7 +37,9 @@ public class SecurityConfig {
             .sessionManagement(sessionManagement -> sessionManagement
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-            .addFilter(authenticationFilter); // Adding the custom filter
+            .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
+            .addFilter(authenticationFilter);
+            
         return http.build();
     }
     
