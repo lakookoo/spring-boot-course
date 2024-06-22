@@ -51,11 +51,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-            Authentication authResult) throws IOException, ServletException {
-        String token = JWT.create()
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        String token = com.auth0.jwt.JWT.create()
             .withSubject(authResult.getName())
-            .withExpireAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
+            .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
             .sign(Algorithm.HMAC512(SecurityConstants.SECRET_KEY));
         response.addHeader(SecurityConstants.AUTHORIZATION, SecurityConstants.BEARER + token);
     }
@@ -63,8 +62,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException failed) throws IOException, ServletException {
-                System.out.println("Boohooo, authentication did notworked");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write(failed.getMessage());
+                response.getWriter().flush();
     }
+
+    
 
 
 }
