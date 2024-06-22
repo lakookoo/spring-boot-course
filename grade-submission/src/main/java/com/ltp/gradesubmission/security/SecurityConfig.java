@@ -13,16 +13,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import com.ltp.gradesubmission.security.filter.AuthenticationFilter;
 import com.ltp.gradesubmission.security.filter.ExceptionHandlerFilter;
+import com.ltp.gradesubmission.security.manager.CustomAuthenticationManager;
 
 
 
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
+    private CustomAuthenticationManager customAuthenticationManager;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
         http
             .headers(headers -> headers
