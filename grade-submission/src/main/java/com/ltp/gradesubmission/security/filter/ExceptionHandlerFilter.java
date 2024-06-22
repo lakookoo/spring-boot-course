@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.ltp.gradesubmission.exception.EntityNotFoundException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,8 +17,15 @@ public class ExceptionHandlerFilter extends  OncePerRequestFilter{
             throws ServletException, IOException {
         try {
             filterChain.doFilter(request, response);
-        } catch (RuntimeException e) {
+        } catch (EntityNotFoundException e){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().write("User name does not exist");
+            response.getWriter().flush();
+        }
+        catch (RuntimeException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("BAD REQUEST");
+            response.getWriter().flush();
         }
         
     }
